@@ -1,63 +1,40 @@
 #!/bin/bash
 # --------------------------------------------
-# E621 Installer / Updater
+# E621 Repository Installer
 # Created by Amex Husky
 # Copyright © 2025 Amex Husky
-# Repository: https://github.com/AmexHusky/E621.git
 # --------------------------------------------
 
 REPO_URL="https://github.com/AmexHusky/E621.git"
 INSTALL_DIR="/opt/E621"
-VENV_DIR="$INSTALL_DIR/venv"
-BINARY="$INSTALL_DIR/dist/main"
 
-# Anzeige des Headers
 echo "--------------------------------------------"
-echo "      E621 Installer / Updater"
+echo "      Willkommen zum E621 Installer"
 echo "      Created by Amex Husky"
-echo "      Copyright © 2025 Amex Husky"
 echo "--------------------------------------------"
 
-# Prüfen, ob root
+# Prüfen auf Root
 if [ "$(id -u)" -ne 0 ]; then
     echo "Bitte mit sudo ausführen!"
     exit 1
 fi
 
-# 1. Systempakete installieren
-apt update && apt install -y git python3 python3-venv python3-pip curl
-
-# 2. Repository klonen oder aktualisieren
+# Repository klonen oder aktualisieren
 if [ ! -d "$INSTALL_DIR" ]; then
     git clone "$REPO_URL" "$INSTALL_DIR"
-    echo "Repository geklont."
+    echo "Repository wurde geklont nach $INSTALL_DIR."
 else
     cd "$INSTALL_DIR" || exit
     git pull
-    echo "Repository aktualisiert."
+    echo "Repository wurde aktualisiert."
 fi
 
-# 3. Virtuelle Umgebung einrichten
-if [ ! -d "$VENV_DIR" ]; then
-    python3 -m venv "$VENV_DIR"
-fi
-source "$VENV_DIR/bin/activate"
-
-# 4. Python-Abhängigkeiten installieren
-pip install --upgrade pip
-pip install -r "$INSTALL_DIR/requirements.txt"
-
-# 5. PyInstaller erstellen
-pip install pyinstaller
-cd "$INSTALL_DIR" || exit
-pyinstaller --onefile main.py
-
-# 6. E621 als globaler Befehl verfügbar machen
+# E621 Befehl global verfügbar machen
 echo '#!/bin/bash' > /usr/local/bin/E621
-echo "sudo $BINARY \"\$@\"" >> /usr/local/bin/E621
+echo "sudo $INSTALL_DIR/E621.sh \"\$@\"" >> /usr/local/bin/E621
 chmod +x /usr/local/bin/E621
 
 echo "--------------------------------------------"
-echo "Installation abgeschlossen!"
-echo "Nun kannst du 'sudo E621' ausführen."
+echo "Alles bereit! Du kannst jetzt mit folgendem Befehl starten:"
+echo "  sudo E621"
 echo "--------------------------------------------"
