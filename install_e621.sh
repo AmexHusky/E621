@@ -3,6 +3,7 @@
 # E621 Installer / Updater
 # Created by Amex Husky
 # Copyright © 2025 Amex Husky
+# Repository: https://github.com/AmexHusky/E621.git
 # --------------------------------------------
 
 REPO_URL="https://github.com/AmexHusky/E621.git"
@@ -29,9 +30,11 @@ apt update && apt install -y git python3 python3-venv python3-pip curl
 # 2. Repository klonen oder aktualisieren
 if [ ! -d "$INSTALL_DIR" ]; then
     git clone "$REPO_URL" "$INSTALL_DIR"
+    echo "Repository geklont."
 else
     cd "$INSTALL_DIR" || exit
     git pull
+    echo "Repository aktualisiert."
 fi
 
 # 3. Virtuelle Umgebung einrichten
