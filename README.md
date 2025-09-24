@@ -7,7 +7,7 @@ Inspiriert vom E621-Meme.
 
 ## Features
 
-- Installiert Tools: git, npm, nodejs, curl, wget, htop, vim, python3, python3-pip, figlet, lolcat  
+- Installiert Tools: npm, nodejs, curl, wget, htop, vim, python3, python3-pip, figlet, lolcat  
 - Einfache Nutzung über den Befehl `E621`  
 
 ---
@@ -17,6 +17,6 @@ Inspiriert vom E621-Meme.
 1. Repository klonen:
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/AmexHusky/E621.git
 cd E621-installer
 
