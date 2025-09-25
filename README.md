@@ -1,4 +1,4 @@
-## 📄 Neues `README.md`
+## 📄 GUI E621 Installer 
 
 ````markdown
 # 🦊 E621 Installer
