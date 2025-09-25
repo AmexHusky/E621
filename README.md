@@ -1,7 +1,3 @@
-Alles klar 🙌 ich schreibe dir ein neues **README.md**, das sofort in dein Repo passt, leicht verständlich ist und wie von dir persönlich klingt.
-
----
-
 ## 📄 Neues `README.md`
 
 ````markdown
