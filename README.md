@@ -1,6 +1,5 @@
 ## 📄 GUI E621 Installer 
 
-````markdown
 # 🦊 E621 Installer
 
 Willkommen bei **E621**, meinem kleinen All-in-One-Installer.  
