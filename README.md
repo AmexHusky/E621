@@ -1,88 +1,90 @@
-# **E621**
----
-
-## **Beschreibung**
-
-E621 ist ein Tool das sämtliche tools wie "htop"; "tmux"; "ncdu"; "wget"; "curl": "git"; "vim nano"; "ssh"; "rsync"; "screen"; "tree"; "net-tools iproute2"; "ufw iptables";"nc"; "jq"; "grep ack ripgrep"; "sed awk"; "docker"; "lsof"; "tmuxinator taskwarrior"
-Das Projekt kann einfach auf Ubuntu installiert und aktualisiert werden. Nach der Installation ist das Tool global verfügbar und kann direkt über die Kommandozeile ausgeführt werden.
+Alles klar 🙌 ich schreibe dir ein neues **README.md**, das sofort in dein Repo passt, leicht verständlich ist und wie von dir persönlich klingt.
 
 ---
 
-## **Features**
+## 📄 Neues `README.md`
 
-* Einfache Installation mit nur einem Befehl
-* Automatische Aktualisierung des Repositorys
-* Installation von Python-Abhängigkeiten und Erstellung einer ausführbaren Binary
-* Globale Verfügbarkeit des Befehls `E621`
-* Cross-User Installation unter Ubuntu
+````markdown
+# 🦊 E621 Installer
+
+Willkommen bei **E621**, meinem kleinen All-in-One-Installer.  
+Mit diesem Tool kannst du wichtige Kern-Programme, Zusatz-Tools oder gleich alles zusammen auf deinem System installieren – wahlweise direkt im Terminal oder über eine einfache grafische Oberfläche.
 
 ---
 
-## **Installation**
+## 🚀 Installation
 
-Führe den folgenden **One-Liner** aus, um alles automatisch zu installieren:
+Zuerst klonst du das Repository:
 
 ```bash
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/AmexHusky/E621/main/install_e621.sh)"
-```
+git clone https://github.com/AmexHusky/E621.git
+cd E621
+````
 
-> Das Skript installiert:
->
-> * Git, Python3, Pip
-> * Das E621 Repository unter `/opt/E621`
-> * Python-Abhängigkeiten aus `requirements.txt`
-> * Eine ausführbare Binary via PyInstaller
-> * Globale Binary `E621` unter `/usr/local/bin/E621`
-
----
-
-## **Benutzung**
-
-### 1. Installation / Update & Starten
+Dann startest du die Installation mit:
 
 ```bash
-sudo E621 -Y
+sudo bash install_e621.sh -a
 ```
 
-* `-Y` bestätigt automatisch alle Installationseinstellungen.
-* Das Skript aktualisiert das Repository, installiert Abhängigkeiten und erstellt die Binary.
+Danach kannst du das Tool überall im System mit dem Befehl `E621` aufrufen.
 
-### 2. Nur starten
+---
+
+## 🛠️ Verwendung
+
+### Terminal-Optionen
 
 ```bash
-sudo E621 start
+sudo E621 -a       # Alles installieren (Core + Extras)
+sudo E621 -c       # Nur Kernkomponenten (Git, Python, Pip)
+sudo E621 -e       # Nur Zusatztools (Docker, htop, usw.)
+sudo E621 -y       # Automatische Standardinstallation (Alles)
+sudo E621 --gui    # Starte die grafische Oberfläche
 ```
 
-* Führt die bereits erstellte Binary aus, ohne Neuinstallation.
+### Grafische Oberfläche
 
----
-
-## **Repository manuell aktualisieren**
-
-Wenn du das Repository oder die Binary neu bauen möchtest, führe einfach:
+Falls du lieber klickst statt tippst:
 
 ```bash
-sudo E621 -Y
+sudo E621 --gui
 ```
 
-Das Skript zieht automatisch die neuesten Änderungen und baut die Binary neu.
+Dort kannst du bequem auswählen, welche Pakete du installieren möchtest.
+Kein Stress, keine langen Befehle merken. 😉
 
 ---
 
-## **Systemvoraussetzungen**
+## 📦 Enthaltene Pakete
 
-* Linux
-* Python 3.11+
-* Root-Rechte 
+### Core
+
+* `git`
+* `python3`
+* `python3-pip`
+
+### Extras
+
+* `docker.io`
+* `htop`
+* `tmux`
+* `curl`
+* `wget`
+* `build-essential`
 
 ---
 
-## **Autor & Lizenz**
+## 📝 Hinweis
 
-**Created by Amex Husky**
-**Copyright © 2025 Amex Husky**
+* Das Script richtet sich an **Debian/Ubuntu-basierte Systeme**.
+* Es wird automatisch ein Symlink erstellt:
+  `E621` → `/usr/local/bin/E621`
+* Damit kannst du den Installer systemweit nutzen.
 
-Dieses Projekt ist Open Source und darf frei genutzt, modifiziert und weitergegeben werden, solange der Urheber genannt wird. 
+---
 
+## ❤️ Von mir für euch
 
-
+Ich baue das hier in meiner Freizeit – für mich, meine Projekte und alle, die sowas praktisch finden.
+Probier’s aus, geb mir gern Feedback oder Ideen für weitere Tools!
