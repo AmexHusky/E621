@@ -1,12 +1,33 @@
 #!/bin/bash
-# E621 Hauptskript mit GUI
-# Autor: AmexHusky (angepasst)
+# E621 Installer & Starter mit GUI oder Terminal-Auswahl
+# Autor: AmexHusky
+# Copyright (c) 2025 AmexHusky. Alle Rechte vorbehalten.
+# Version: 1.0
 
+install_core() {
+  echo "[+] Installiere Kernkomponenten..."
+  sudo apt-get update
+  sudo apt-get install -y git python3 python3-pip
+}
+
+install_extras() {
+  echo "[+] Installiere Zusatztools..."
+  sudo apt-get install -y docker.io htop tmux curl wget build-essential
+}
+
+install_all() {
+  install_core
+  install_extras
+}
+
+# -------------------------
+# GUI-Funktion
+# -------------------------
 run_gui() {
   if ! command -v zenity &> /dev/null; then
-    echo "[!] Zenity nicht gefunden – installiere..."
-    sudo apt-get update
-    sudo apt-get install -y zenity
+    echo "[!] Zenity nicht gefunden – wechsle in Terminal-Auswahl..."
+    run_terminal_menu
+    return
   fi
 
   CHOICES=$(zenity --list --checklist \
@@ -37,7 +58,49 @@ run_gui() {
 }
 
 # -------------------------
-# CLI-Steuerung
+# Terminal-Menü-Funktion
+# -------------------------
+run_terminal_menu() {
+  echo "E621 Installer (Terminal-Auswahl)"
+  echo "-------------------------------"
+  options=("all" "core" "extras" "y" "quit")
+
+  select opt in "${options[@]}"
+  do
+    case $opt in
+      all)
+        echo "Du hast 'all' gewählt"
+        bash "$HOME/E621/install_e621.sh" -a
+        break
+        ;;
+      core)
+        echo "Du hast 'core' gewählt"
+        bash "$HOME/E621/install_e621.sh" -c
+        break
+        ;;
+      extras)
+        echo "Du hast 'extras' gewählt"
+        bash "$HOME/E621/install_e621.sh" -e
+        break
+        ;;
+      y)
+        echo "Du hast 'y' gewählt (alles automatisch)"
+        bash "$HOME/E621/install_e621.sh" -y
+        break
+        ;;
+      quit)
+        echo "Abbruch"
+        break
+        ;;
+      *)
+        echo "Ungültige Auswahl $REPLY"
+        ;;
+    esac
+  done
+}
+
+# -------------------------
+# Hauptlogik
 # -------------------------
 case "$1" in
   --gui)
@@ -53,12 +116,9 @@ case "$1" in
     bash "$HOME/E621/install_e621.sh" -e
     ;;
   *)
+    # Keine Parameter = Terminal-Menü
     echo "E621 Installer"
-    echo "Verwendung:"
-    echo "  sudo E621 -a       # Alles installieren"
-    echo "  sudo E621 -c       # Nur Kern installieren"
-    echo "  sudo E621 -e       # Nur Extras installieren"
-    echo "  sudo E621 --gui    # Grafische Oberfläche starten"
-    echo "  sudo E621 -y       # Automatisch alles (Standard)"
+    echo "Keine Parameter angegeben – Terminal-Auswahl wird gestartet..."
+    run_terminal_menu
     ;;
 esac
