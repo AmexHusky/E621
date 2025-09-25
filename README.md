@@ -3,7 +3,12 @@
 
 ## **Beschreibung**
 
-E621 ist ein Tool/Projekt (bitte hier kurz beschreiben, was dein Projekt genau macht).
+E621 ist ein Tool das sämtliche tools wie "htop"; "tmux"; "ncdu"; "wget"; "curl": "git"; "vim nano"; "ssh"; "rsync"; "screen"; "tree"; "net-tools iproute2"; "ufw iptables";"nc"; "jq"; "grep ack ripgrep"
+"sed awk"
+"docker"
+"lsof"
+"tmuxinator taskwarrior"
+)
 Das Projekt kann einfach auf Ubuntu installiert und aktualisiert werden. Nach der Installation ist das Tool global verfügbar und kann direkt über die Kommandozeile ausgeführt werden.
 
 ---
