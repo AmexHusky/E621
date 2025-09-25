@@ -1,7 +1,6 @@
 #!/bin/bash
-# Installer-Skript für E621
-# Unterstützt verschiedene Modi: core, extras, all
-# Autor: AmexHusky angepasst mit GUI-Support
+# E621 Installationsskript
+# Autor: AmexHusky (angepasst)
 
 install_core() {
   echo "[+] Installiere Kernkomponenten..."
@@ -19,7 +18,9 @@ install_all() {
   install_extras
 }
 
-# Standardmodus = all
+# -------------------------
+# Parameter auswerten
+# -------------------------
 MODE="all"
 
 while [[ $# -gt 0 ]]; do
@@ -40,6 +41,9 @@ while [[ $# -gt 0 ]]; do
   shift
 done
 
+# -------------------------
+# Installation starten
+# -------------------------
 case "$MODE" in
   all)
     install_all
@@ -52,7 +56,9 @@ case "$MODE" in
     ;;
 esac
 
-# Am Ende dein Repo aktualisieren und E621 verlinken
+# -------------------------
+# Repo aktualisieren & Verknüpfen
+# -------------------------
 echo "[+] Klone/aktualisiere Repository..."
 if [ ! -d "$HOME/E621" ]; then
   git clone https://github.com/AmexHusky/E621.git "$HOME/E621"
