@@ -1,22 +1,6 @@
 #!/bin/bash
-# E621 Installer & Starter
-# Autor: AmexHusky (angepasst mit GUI)
-
-install_core() {
-  echo "[+] Installiere Kernkomponenten..."
-  sudo apt-get update
-  sudo apt-get install -y git python3 python3-pip
-}
-
-install_extras() {
-  echo "[+] Installiere Zusatztools..."
-  sudo apt-get install -y docker.io htop tmux curl wget build-essential
-}
-
-install_all() {
-  install_core
-  install_extras
-}
+# E621 Hauptskript mit GUI
+# Autor: AmexHusky (angepasst)
 
 run_gui() {
   if ! command -v zenity &> /dev/null; then
@@ -43,35 +27,30 @@ run_gui() {
 
   for choice in $CHOICES; do
     case "$choice" in
-      all)    install_all ;;
-      core)   install_core ;;
-      extras) install_extras ;;
+      all)    bash "$HOME/E621/install_e621.sh" -a ;;
+      core)   bash "$HOME/E621/install_e621.sh" -c ;;
+      extras) bash "$HOME/E621/install_e621.sh" -e ;;
     esac
   done
 
   zenity --info --text="E621 wurde erfolgreich eingerichtet! Starte mit:\nsudo E621 -Y"
 }
 
-# -------------------
-# Hauptlogik
-# -------------------
-
+# -------------------------
+# CLI-Steuerung
+# -------------------------
 case "$1" in
-  -a|--all)
-    install_all
-    ;;
-  -c|--core)
-    install_core
-    ;;
-  -e|--extras)
-    install_extras
-    ;;
   --gui)
     run_gui
     ;;
-  -y|-Y)
-    echo "[✓] Update/Installation wird automatisch durchgeführt..."
-    install_all
+  -a|--all|-y|-Y)
+    bash "$HOME/E621/install_e621.sh" -a
+    ;;
+  -c|--core)
+    bash "$HOME/E621/install_e621.sh" -c
+    ;;
+  -e|--extras)
+    bash "$HOME/E621/install_e621.sh" -e
     ;;
   *)
     echo "E621 Installer"
