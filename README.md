@@ -3,12 +3,7 @@
 
 ## **Beschreibung**
 
-E621 ist ein Tool das sämtliche tools wie "htop"; "tmux"; "ncdu"; "wget"; "curl": "git"; "vim nano"; "ssh"; "rsync"; "screen"; "tree"; "net-tools iproute2"; "ufw iptables";"nc"; "jq"; "grep ack ripgrep"
-"sed awk"
-"docker"
-"lsof"
-"tmuxinator taskwarrior"
-)
+E621 ist ein Tool das sämtliche tools wie "htop"; "tmux"; "ncdu"; "wget"; "curl": "git"; "vim nano"; "ssh"; "rsync"; "screen"; "tree"; "net-tools iproute2"; "ufw iptables";"nc"; "jq"; "grep ack ripgrep"; "sed awk"; "docker"; "lsof"; "tmuxinator taskwarrior"
 Das Projekt kann einfach auf Ubuntu installiert und aktualisiert werden. Nach der Installation ist das Tool global verfügbar und kann direkt über die Kommandozeile ausgeführt werden.
 
 ---
@@ -70,7 +65,7 @@ Wenn du das Repository oder die Binary neu bauen möchtest, führe einfach:
 sudo E621 -Y
 ```
 
-aus – das Skript zieht automatisch die neuesten Änderungen und baut die Binary neu.
+Das Skript zieht automatisch die neuesten Änderungen und baut die Binary neu.
 
 ---
 
@@ -78,7 +73,7 @@ aus – das Skript zieht automatisch die neuesten Änderungen und baut die Binar
 
 * Linux
 * Python 3.11+
-* Root-Rechte für Installation/Update
+* Root-Rechte 
 
 ---
 
@@ -89,11 +84,5 @@ aus – das Skript zieht automatisch die neuesten Änderungen und baut die Binar
 
 Dieses Projekt ist Open Source und darf frei genutzt, modifiziert und weitergegeben werden, solange der Urheber genannt wird. 
 
----
-
-## **Support / Kontakt**
-
-Für Fragen oder Support kontaktiere:
-**GitHub:** [https://github.com/AmexHusky/E621](https://github.com/AmexHusky/E621)
 
 
