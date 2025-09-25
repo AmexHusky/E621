@@ -1,40 +1,67 @@
 #!/bin/bash
-# --------------------------------------------
-# E621 Repository Installer
-# Created by Amex Husky
-# Copyright © 2025 Amex Husky
-# --------------------------------------------
+# Installer-Skript für E621
+# Unterstützt verschiedene Modi: core, extras, all
+# Autor: AmexHusky angepasst mit GUI-Support
 
-REPO_URL="https://github.com/AmexHusky/E621.git"
-INSTALL_DIR="/opt/E621"
+install_core() {
+  echo "[+] Installiere Kernkomponenten..."
+  sudo apt-get update
+  sudo apt-get install -y git python3 python3-pip
+}
 
-echo "--------------------------------------------"
-echo "      Willkommen zum E621 Installer"
-echo "      Created by Amex Husky"
-echo "--------------------------------------------"
+install_extras() {
+  echo "[+] Installiere Zusatztools..."
+  sudo apt-get install -y docker.io htop tmux curl wget build-essential
+}
 
-# Prüfen auf Root
-if [ "$(id -u)" -ne 0 ]; then
-    echo "Bitte mit sudo ausführen!"
-    exit 1
-fi
+install_all() {
+  install_core
+  install_extras
+}
 
-# Repository klonen oder aktualisieren
-if [ ! -d "$INSTALL_DIR" ]; then
-    git clone "$REPO_URL" "$INSTALL_DIR"
-    echo "Repository wurde geklont nach $INSTALL_DIR."
+# Standardmodus = all
+MODE="all"
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    -a|--all|-A)
+      MODE="all"
+      ;;
+    -c|--core|-C)
+      MODE="core"
+      ;;
+    -e|--extras|-E)
+      MODE="extras"
+      ;;
+    -y|-Y)
+      AUTO_YES="true"
+      ;;
+  esac
+  shift
+done
+
+case "$MODE" in
+  all)
+    install_all
+    ;;
+  core)
+    install_core
+    ;;
+  extras)
+    install_extras
+    ;;
+esac
+
+# Am Ende dein Repo aktualisieren und E621 verlinken
+echo "[+] Klone/aktualisiere Repository..."
+if [ ! -d "$HOME/E621" ]; then
+  git clone https://github.com/AmexHusky/E621.git "$HOME/E621"
 else
-    cd "$INSTALL_DIR" || exit
-    git pull
-    echo "Repository wurde aktualisiert."
+  cd "$HOME/E621" && git pull
 fi
 
-# E621 Befehl global verfügbar machen
-echo '#!/bin/bash' > /usr/local/bin/E621
-echo "sudo $INSTALL_DIR/E621.sh \"\$@\"" >> /usr/local/bin/E621
-chmod +x /usr/local/bin/E621
+echo "[+] Verknüpfe E621 ins System..."
+sudo ln -sf "$HOME/E621/E621.sh" /usr/local/bin/E621
+sudo chmod +x "$HOME/E621/E621.sh"
 
-echo "--------------------------------------------"
-echo "Alles bereit! Du kannst jetzt mit folgendem Befehl starten:"
-echo "  sudo E621"
-echo "--------------------------------------------"
+echo "[✓] Installation abgeschlossen! Starte mit: sudo E621 -Y"
